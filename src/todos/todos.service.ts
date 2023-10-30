@@ -15,7 +15,7 @@ import {
   Repository,
 } from 'typeorm';
 import { TodoFilterQueries } from './common';
-import { UserEntity } from '../../src/users/entities/user.entity';
+import { UserEntity } from '../users/entities/user.entity';
 
 @Injectable()
 export class TodosService {
