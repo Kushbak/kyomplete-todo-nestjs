@@ -1,4 +1,4 @@
-import { TodoEntity } from 'src/todos/entities/todo.entity';
+import { TodoEntity } from '../../../src/todos/entities/todo.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
