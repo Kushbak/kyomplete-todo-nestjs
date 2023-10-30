@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { UserEntity } from 'src/users/entities/user.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
 @Entity('todos')
 export class TodoEntity {
@@ -11,9 +12,12 @@ export class TodoEntity {
   @Column({ type: 'boolean', default: false })
   is_completed: boolean;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  due_date?: string;
+  @Column({ type: 'json', default: null })
+  result: Record<string, any>;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  due_time?: string;
+  @Column({ type: 'timestamptz' })
+  due_date: Date;
+
+  @ManyToOne(() => UserEntity, (user) => user.todos)
+  assigned_to: UserEntity;
 }

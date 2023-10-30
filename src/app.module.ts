@@ -2,11 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TodosModule } from './todos/todos.module';
-import { AuthModule } from './users/auth.module';
-import { TodosController } from './todos/todos.controller';
+import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TodosService } from './todos/todos.service';
 
 @Module({
   imports: [
@@ -28,7 +26,7 @@ import { TodosService } from './todos/todos.service';
     AuthModule,
     TodosModule,
   ],
-  controllers: [TodosController, AppController],
-  providers: [AppService, TodosService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

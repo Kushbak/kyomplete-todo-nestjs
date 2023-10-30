@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
@@ -21,8 +22,18 @@ export class TodosController {
   }
 
   @Get()
-  findAll() {
-    return this.todosService.findAll();
+  findAll(
+    @Query('assigned_to') assigned_to?: string,
+    @Query('is_completed') isCompleted?: boolean,
+    @Query('due_date_from') dueDateFrom?: string,
+    @Query('due_date_to') dueDateTo?: string,
+  ) {
+    return this.todosService.findAll({
+      assigned_to,
+      isCompleted,
+      dueDateFrom,
+      dueDateTo,
+    });
   }
 
   @Get(':id')

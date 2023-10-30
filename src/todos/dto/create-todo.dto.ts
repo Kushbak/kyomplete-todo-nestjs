@@ -1,5 +1,5 @@
 export class CreateTodoDto {
   title: string;
-  due_date?: string;
-  due_time?: string;
+  due_date: Date;
+  assigned_to: string;
 }
