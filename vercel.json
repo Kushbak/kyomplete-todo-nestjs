@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "builds": [{
+    "src": "src/main.ts",
+    "use": "@vercel/nodoe"
+  }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts",
+      "methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "DELETE"
+      ] 
+    }
+  ]
+}

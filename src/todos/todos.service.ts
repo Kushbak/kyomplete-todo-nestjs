@@ -79,7 +79,6 @@ export class TodosService {
         is_completed: 'ASC',
       },
     });
-    console.log({ res, filters, findOptionsWhere });
     return res;
   }
 
