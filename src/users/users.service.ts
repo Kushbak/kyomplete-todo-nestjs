@@ -12,13 +12,7 @@ export class UsersService {
     private readonly userRepository: Repository<UserEntity>,
   ) {}
   createUser(user: CreateUserDto) {
-    const random = Math.floor(Math.random() * 10000);
-    const newUser: CreateUserDto = {
-      email: `kyowner${random}@gmail.com`,
-      password: String(random),
-      username: `kyowner${random}`,
-    };
-    return this.userRepository.save(newUser);
+    return this.userRepository.save(user);
   }
 
   findAll() {
@@ -36,7 +30,7 @@ export class UsersService {
   async update(id: number, updateUserDto: UpdateUserDto) {
     const candidate = await this.userRepository.findOneBy({ id });
     if (!candidate) {
-      throw new NotFoundException(`User with id ${id} is not exists`);
+      throw new NotFoundException(`Todo with id ${id} is not exists`);
     }
     const user = Object.assign(candidate, updateUserDto);
     await this.userRepository.save(user);
