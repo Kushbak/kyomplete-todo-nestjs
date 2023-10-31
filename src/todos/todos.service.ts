@@ -8,6 +8,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TodoEntity } from './entities/todo.entity';
 import {
+  Between,
   FindOptionsWhere,
   In,
   LessThanOrEqual,
@@ -54,24 +55,24 @@ export class TodosService {
       findOptionsWhere.is_completed = filters.isCompleted;
     }
 
-    if (filters.dueDateFrom) {
-      const findLTE = MoreThanOrEqual(new Date(filters.dueDateFrom));
+    if (filters.dueDateFrom && filters.dueDateTo) {
+      findOptionsWhere.due_date = Between(
+        new Date(filters.dueDateFrom),
+        new Date(filters.dueDateTo),
+      );
+    } else {
+      if (filters.dueDateFrom) {
+        findOptionsWhere.due_date = MoreThanOrEqual(
+          new Date(filters.dueDateFrom),
+        );
+      }
 
-      findOptionsWhere.due_date =
-        typeof findOptionsWhere.due_date === 'undefined'
-          ? findLTE
-          : Object.assign(findOptionsWhere.due_date, findLTE);
+      if (filters.dueDateTo) {
+        findOptionsWhere.due_date = LessThanOrEqual(
+          new Date(filters.dueDateTo),
+        );
+      }
     }
-
-    if (filters.dueDateTo) {
-      const findGTE = LessThanOrEqual(new Date(filters.dueDateTo));
-
-      findOptionsWhere.due_date =
-        typeof findOptionsWhere.due_date === 'undefined'
-          ? findGTE
-          : Object.assign(findOptionsWhere.due_date, findGTE);
-    }
-
     const res = await this.todoRepository.find({
       relations: { assigned_to: true },
       where: findOptionsWhere,
