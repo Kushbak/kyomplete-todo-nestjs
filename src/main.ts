@@ -5,7 +5,7 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: false });
   const corsOptions: CorsOptions = {
-    origin: process.env.ORIGIN || 'http://localhost:3000', // or your frontend application's URL
+    origin: process.env.ORIGIN || 'https://kyomplete-todo-nextjs.vercel.app/', // or your frontend application's URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   };
