@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: false });
+  const app = await NestFactory.create(AppModule, { cors: true });
   const corsOptions: CorsOptions = {
     origin: process.env.ORIGIN || 'https://kyomplete-todo-nextjs.vercel.app/', // or your frontend application's URL
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
